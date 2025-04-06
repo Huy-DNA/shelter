@@ -11,6 +11,9 @@ RUN chmod +x /vault/entrypoint.sh
 COPY init.sh /vault/init.sh
 RUN chmod +x /vault/init.sh
 
+RUN apt-get update && apt-get install -y dos2unix
+RUN find /vault -type f -name "*.sh" -exec dos2unix {} \;
+
 ENV VAULT_ADDR=http://vault-1:8200
 ENV VAULT_API_ADDR=http://vault-1:8200
 
