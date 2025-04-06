@@ -9,7 +9,7 @@ RUN chmod 700 /vault/config/.env
 COPY entrypoint.sh /vault/entrypoint.sh
 RUN chmod +x /vault/entrypoint.sh
 
-RUN apt-get update && apt-get install -y dos2unix
+RUN apk add dos2unix
 RUN find /vault -type f -name "*.sh" -exec dos2unix {} \;
 
 ENV VAULT_ADDR=http://vault-1:8200
