@@ -146,6 +146,9 @@ Grafana transforms the metrics collected by Prometheus into actionable insights 
 5. Set up alerting based on visualization thresholds
 
 == NGINX
+
+#figure(caption: "NGINX", image(width: 100pt, "../../static/nginx.svg"))
+
 === Overview
 NGINX is a high-performance web server, reverse proxy, and load balancer. It efficiently handles connections, providing robust HTTP/HTTPS services with minimal resource usage.
 
