@@ -35,6 +35,15 @@ services/
 └── docker-compose.yml   = Service orchestration
 ```
 
+*`vault-transit-1/config.hcl`* defines the transit server configuration:
+- Uses file storage backend
+- Configures API and cluster addresses
+
+*`vault-{1,2,3}/config.hcl`* defines each cluster node's configuration:
+- Uses Raft storage backend
+- Specifies cluster addresses
+- Configures the transit auto-unseal
+
 === Vault auto-unseal - Vault transit engine
 
 For Vault auto-unseal, we use the simplest approach that Vault supports: the Vault Transit Engine. This implementation follows a "transit as a service" pattern, where one dedicated Vault instance (`vault-transit-1`) provides encryption services used to unseal the other Vault instances in the cluster.
@@ -188,34 +197,7 @@ Vault-2 and Vault-3 follow a similar but simpler process:
 3. Join the Raft cluster using the `raft join` command
 4. Start serving requests once joined
 
-==== Key configuration files
-
-*`vault-transit-1/config.hcl`* defines the transit server configuration:
-- Uses file storage backend
-- Configures API and cluster addresses
-- Sets up TLS (if applicable)
-
-*`vault-{1,2,3}/config.hcl`* defines each cluster node's configuration:
-- Uses Raft storage backend
-- Specifies cluster addresses
-- Configures the transit auto-unseal
-
-==== Docker deployment
-
-The `docker-compose.yml` file orchestrates the entire deployment:
-- Creates an overlay network for secure inter-service communication
-- Mounts persistent volumes for each Vault instance
-- Adds IPC_LOCK capability for memory locking (security feature)
-- Maps ports for external access
-- Configures deployment constraints for Docker Swarm
-
-The services are deployed as individual containers, each with:
-- Custom Docker image
-- Persistent storage
-- Network connectivity
-- Resource constraints
-
-=== Startup sequence
+==== Startup sequence
 
 The deployment follows a carefully orchestrated startup sequence:
 
