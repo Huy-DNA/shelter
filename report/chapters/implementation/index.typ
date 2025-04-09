@@ -1,6 +1,6 @@
 = Implementation <implementation>
 
-=== Vault
+== Vault
 
 The implementation organizes each Vault instance in its own directory:
 
