@@ -2,7 +2,7 @@
 
 == Vault
 
-#figure(caption: "Vault logo", image("../../static/vault.svg"))
+#figure(caption: "Vault", image(width: 100pt, "../../static/vault.svg"))
 
 === Overview
 HashiCorp Vault is a secrets management tool that securely stores and controls access to tokens, passwords, certificates, API keys, and other sensitive data. It handles leasing, key revocation, key rolling, and auditing through a unified API.
@@ -30,7 +30,7 @@ Vault serves as the central secrets manager in our high-availability setup. It s
 
 == ZeroTier
 
-#figure(caption: "Vault logo", image("../../static/zerotier.png"))
+#figure(caption: "Zerotier", image(width: 100pt, "../../static/zerotier.png"))
 
 === Overview
 ZeroTier is a software-defined networking solution that creates secure, virtualized networks between devices regardless of physical location. It enables direct peer-to-peer connections through NAT traversal techniques.
@@ -59,7 +59,7 @@ ZeroTier establishes the secure networking layer for our Vault cluster. It creat
 
 == Docker Swarm
 
-#figure(caption: "Vault logo", image("../../static/swarm.png"))
+#figure(caption: "Docker swarm", image(width: 100pt, "../../static/swarm.png"))
 
 === Overview
 Docker Swarm is a container orchestration tool built into Docker that allows you to create and manage a cluster of Docker nodes. It provides native clustering and scheduling capabilities for Docker containers.
@@ -89,7 +89,7 @@ Docker Swarm orchestrates our containerized Vault deployment, providing:
 
 == Prometheus
 
-#figure(caption: "Vault logo", image("../../static/prometheus.png"))
+#figure(caption: "Prometheus", image(width: 100pt, "../../static/prometheus.png"))
 
 === Overview
 Prometheus is an open-source systems monitoring and alerting toolkit. It collects and stores metrics as time-series data, recording real-time information about the state of systems.
@@ -118,7 +118,7 @@ Prometheus monitors the health and performance of our Vault cluster, providing:
 
 == Grafana
 
-#figure(caption: "Vault logo", image("../../static/grafana.jpg"))
+#figure(caption: "Grafana", image(width: 100pt, "../../static/grafana.jpg"))
 
 === Overview
 Grafana is an open-source analytics and interactive visualization platform. It connects to various data sources and provides dashboards with panels representing metrics over time.
