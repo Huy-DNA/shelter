@@ -43,7 +43,7 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-  
+
   vault-3:
     image: vault-3
     hostname: vault-3
@@ -58,7 +58,16 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-
+  nginx:
+    image: nginx
+    hostname: nginx
+    ports:
+      - "80:80"
+    networks:
+      - vault-network
+    deploy:
+      mode: replicated
+      replicas: 1
 networks:
   vault-network:
     driver: overlay
