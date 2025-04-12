@@ -14,18 +14,39 @@ wait_for_transit() {
 
 wait_for_transit
 
+MAX_DURATION=300  # 5 minutes in seconds
+RETRY_DELAY=5     # 5 seconds between attempts
+
 echo "Authenticating to Vault..."
-VAULT_TOKEN=$(curl -s \
-    --request POST \
-    --data "{\"password\": \"$UNSEAL_PASSWORD\"}" \
-    http://vault-transit-1:8200/v1/auth/userpass/login/internal-server | jq -r '.auth.client_token')
 
-if [ "$VAULT_TOKEN" == "null" ] || [ -z "$VAULT_TOKEN" ]; then
-    echo "Authentication failed"
+start_time=$(date +%s)
+
+while true; do
+  VAULT_TOKEN=$(curl -s \
+      --request POST \
+      --data "{\"password\": \"$UNSEAL_PASSWORD\"}" \
+      http://vault-transit-1:8200/v1/auth/userpass/login/internal-server | jq -r '.auth.client_token')
+  
+  if [ "$VAULT_TOKEN" != "null" ] && [ -n "$VAULT_TOKEN" ]; then
+    echo "Authentication successful!"
+    break
+  fi
+  
+  current_time=$(date +%s)
+  elapsed_time=$((current_time - start_time))
+  
+  echo "Authentication attempt $attempt failed. Elapsed time: ${elapsed_time}s of ${MAX_DURATION}s"
+  
+  if [ $elapsed_time -ge $MAX_DURATION ]; then
+    echo "Maximum retry duration (5 minutes) reached. Authentication failed."
     exit 1
-fi
+  fi
+  
+  echo "Retrying in $RETRY_DELAY seconds..."
+  sleep $RETRY_DELAY
+done
 
-echo "Authentication successful"
+echo "Proceeding with Vault token..."
 
 TRANSIT_TOKEN=$(curl -s \
     --header "X-Vault-Token: $VAULT_TOKEN" \
