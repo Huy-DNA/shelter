@@ -1,4 +1,29 @@
 services:
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    networks:
+      - vault-network
+    configs:
+      - source: prometheus-config
+        target: /etc/prometheus/prometheus.yml
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - vault-network
+    volumes:
+      - grafana-data:/var/lib/grafana
+    deploy:
+      mode: replicated
+      replicas: 1
+
   vault-transit-1:
     image: vault-transit-1
     hostname: vault-transit-1
@@ -69,3 +94,8 @@ volumes:
   vault-1-data:
   vault-2-data:
   vault-3-data:
+  grafana-data:
+
+configs:
+  prometheus-config:
+    external: true
