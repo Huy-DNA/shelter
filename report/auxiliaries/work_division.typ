@@ -14,4 +14,11 @@
     - Setup Vault auto-unsealing using transit engine with Docker Swarm
     - Setup VPN ZeroTier
   ],
+
+  [2110541],
+  [Trần Nguyễn Phương Thành],
+  [
+    - Setup Vault cluster with Docker Swarm.
+    - Monitor Vault Node performance with Prometheus and Grafana.
+  ]
 )
