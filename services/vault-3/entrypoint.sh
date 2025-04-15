@@ -15,8 +15,8 @@ wait_for_transit() {
 wait_for_transit
 
 wait_for_leader() {
-  until curl -s http://vault-1:8200/v1/sys/health | grep -q '"initialized":true'; do
-    echo "vault-1 not ready yet, waiting..."
+  until curl -s http://vault-1:8200/v1/sys/health | grep -q '"sealed":false'; do
+    echo "Primary vault still sealed, waiting..."
     sleep 2
   done
 }
