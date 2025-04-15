@@ -23,4 +23,5 @@ seal "transit" {
 
 api_addr = "http://vault-1:8200"
 cluster_addr = "http://vault-1:8201"
+cluster_name = "vault-cluster"
 ui = true

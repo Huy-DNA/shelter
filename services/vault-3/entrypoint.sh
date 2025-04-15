@@ -71,7 +71,6 @@ export VAULT_TOKEN=$TRANSIT_TOKEN
 echo "Transit token retrieved successfully"
 echo "Starting vault..."
 
-vault operator raft join http://vault-1:8200 > /vault/data/init.txt
 vault server -config=/vault/config/vault-config.hcl &
 VAULT_PID=$!
 echo "Waiting for Vault to start..."
