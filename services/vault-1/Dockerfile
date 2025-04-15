@@ -1,6 +1,7 @@
 FROM hashicorp/vault
 
 EXPOSE 8200
+EXPOSE 8201
 
 COPY config.hcl /vault/config/vault-config.hcl
 COPY .env /vault/config/.env

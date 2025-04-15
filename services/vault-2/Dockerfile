@@ -1,6 +1,7 @@
 FROM hashicorp/vault
 
 EXPOSE 8200
+EXPOSE 8201
 
 COPY config.hcl /vault/config/vault-config.hcl
 COPY .env /vault/config/.env
@@ -13,6 +14,6 @@ RUN apk add dos2unix
 RUN find /vault -type f -name "*.sh" -exec dos2unix {} \;
 
 ENV VAULT_ADDR=http://vault-1:8200
-ENV VAULT_API_ADDR=http://vault-1:8200
+ENV VAULT_API_ADDR=http://vault-2:8200
 
 ENTRYPOINT ["/vault/entrypoint.sh"]
