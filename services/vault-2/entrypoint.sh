@@ -5,6 +5,15 @@ apk add curl jq
 source /vault/config/.env
 umask 077
 
+wait_for_transit() {
+  until curl -s http://vault-transit-1:8200/v1/sys/health | grep -q '"initialized":true'; do
+    echo "vault-transit not ready yet, waiting..."
+    sleep 2
+  done
+}
+
+wait_for_transit
+
 wait_for_leader() {
   until curl -s http://vault-1:8200/v1/sys/health | grep -q '"initialized":true'; do
     echo "vault-1 not ready yet, waiting..."
