@@ -1,36 +1,36 @@
 #!/bin/sh
 set -e
 
-docker service rm vault_vault-1 vault_vault-2 vault_vault-3 vault_vault-transit-1 || echo "Services not created yet"
-docker rm $(docker ps -a --filter ancestor=vault-1 --format="{{.ID}}") --force 2&> /dev/null || echo "Containers not created yet"
-docker rm $(docker ps -a --filter ancestor=vault-2 --format="{{.ID}}") --force 2&> /dev/null || echo "Containers not created yet"
-docker rm $(docker ps -a --filter ancestor=vault-3 --format="{{.ID}}") --force 2&> /dev/null || echo "Containers not created yet"
-docker rm $(docker ps -a --filter ancestor=vault-transit-1 --format="{{.ID}}") --force 2&> /dev/null || echo "Containers not created yet"
-docker volume rm vault_vault-1-data vault_vault-2-data vault_vault-3-data vault_vault-transit-1-data || echo "Volumes not created yet"
+echo "🧹 Cleaning up old Docker services, containers, volumes, images..."
+
+docker service rm vault_vault-1 vault_vault-2 vault_vault-3 vault_vault-transit-1 vault_prometheus vault_grafana || echo "Services not created yet"
+
+for IMAGE in vault-1 vault-2 vault-3 vault-transit-1; do
+  docker rm $(docker ps -a --filter ancestor=$IMAGE --format="{{.ID}}") --force 2>/dev/null || echo "Containers for $IMAGE not found"
+done
+
+docker volume rm vault_vault-1-data vault_vault-2-data vault_vault-3-data vault_vault-transit-1-data grafana-data || echo "Volumes not created yet"
+
 docker rmi vault-1 vault-2 vault-3 vault-transit-1 --force || echo "Images not created yet"
 
+echo "🧼 Cleaning old Docker config for Prometheus (if exists)..."
+docker config rm prometheus-config 2>/dev/null || echo "No existing prometheus-config to remove"
+
+echo "📦 Creating new Docker config for Prometheus..."
+docker config create prometheus-config ./prometheus/prometheus.yml
+
+echo "🔄 Initializing Docker Swarm (if not active)..."
 if ! docker info --format '{{.Swarm.LocalNodeState}}' | grep -q "active"; then
-  echo "Initializing Docker Swarm..."
-  sudo docker swarm init
+  docker swarm init || echo "Swarm already initialized"
 fi
 
-cd vault-1
-docker build -t vault-1 .
-cd -
+echo "🔨 Building Vault service images..."
+for SERVICE in vault-1 vault-2 vault-3 vault-transit-1; do
+  echo "➡️ Building $SERVICE..."
+  (cd $SERVICE && docker build -t $SERVICE .)
+done
 
-cd vault-2
-docker build -t vault-2 .
-cd -
+echo "🚀 Deploying full Vault stack with Prometheus and Grafana..."
+docker stack deploy --compose-file=docker-compose.yml vault
 
-cd vault-3
-docker build -t vault-3 .
-cd -
-
-cd vault-transit-1
-docker build -t vault-transit-1 .
-cd -
-
-echo "Starting full Vault stack..."
-sudo docker stack deploy --compose-file=docker-compose.yml vault
-
-echo "Vault deployment complete."
+echo "✅ Vault stack deployment complete."
