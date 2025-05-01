@@ -10,7 +10,7 @@ services:
         target: /etc/prometheus/prometheus.yml
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 3
 
   grafana:
     image: grafana/grafana
@@ -22,7 +22,7 @@ services:
       - grafana-data:/var/lib/grafana
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 3
 
   vault-transit-1:
     image: vault-transit-1
@@ -37,7 +37,7 @@ services:
       - vault-network
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 3
 
   vault-1:
     image: vault-1
@@ -92,7 +92,7 @@ services:
       - vault-network
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 3
 networks:
   vault-network:
     driver: overlay
