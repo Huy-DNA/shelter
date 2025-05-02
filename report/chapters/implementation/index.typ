@@ -206,3 +206,7 @@ The deployment follows a carefully orchestrated startup sequence:
 3. `vault-2` and `vault-3` wait for `vault-1` to be ready, then join the cluster
 
 This sequence ensures that dependencies are satisfied before each service attempts to start, preventing race conditions and initialization failures.
+
+== Reverse Proxy / Load Balancer (NGINX)
+
+#include "nginx.typ"
