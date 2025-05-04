@@ -10,5 +10,5 @@
 #{ include "./implementation/index.typ" }
 #pagebreak()
 
-#{ include "./installation/index.typ" }
+#{ include "./deployment/index.typ" }
 #pagebreak()
