@@ -84,7 +84,8 @@ services:
       mode: replicated
       replicas: 1
   nginx:
-    image: nginx
+    build: ./nginx
+    image: nginx:custom
     hostname: nginx
     ports:
       - "80:80"
