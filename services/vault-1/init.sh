@@ -1,11 +1,8 @@
 #!/bin/bash
 set -e
 
+source /vault/config/.env
 vault operator init > /vault/data/init.txt
-
-ROOT_TOKEN=$(grep 'Initial Root Token' /vault/data/init.txt | awk '{print $NF}')
-
-vault login $ROOT_TOKEN
 
 vault auth enable userpass
 
