@@ -1,68 +1,51 @@
 hashicorp-get-started:
   type: web
   title: "Set Up Vault"
-  URL: https://developer.hashicorp.com/vault/tutorials/get-started/setup
-  accessed:
-    year: 2025
-    month: 5
-    day: 4
-  author:
-    - name: "HashiCorp"
+  url:
+    value: https://developer.hashicorp.com/vault/tutorials/get-started/setup
+    date: 2025-05-04
+  author: "HashiCorp"
   container-title: "HashiCorp Developer"
-  issued:
-    year: 2023
 
 testdriven-vault-consul:
   type: web
   title: "Deploying Vault and Consul with Docker Compose"
-  URL: https://testdriven.io/blog/deploying-vault-and-consul/
-  accessed:
-    year: 2025
-    month: 5
-    day: 4
-  author:
-    - name: "TestDriven.io"
-  issued:
-    year: 2022
+  url:
+    value: https://testdriven.io/blog/deploying-vault-and-consul/
+    date: 2025-05-04
+  author: "TestDriven.io"
 
 hashicorp-telemetry:
   type: web
   title: "Monitor Vault Telemetry with Prometheus and Grafana"
-  URL: https://developer.hashicorp.com/vault/tutorials/archive/monitor-telemetry-grafana-prometheus
-  accessed:
-    year: 2025
-    month: 5
-    day: 4
-  author:
-    - name: "HashiCorp"
+  url:
+    value: https://developer.hashicorp.com/vault/tutorials/archive/monitor-telemetry-grafana-prometheus
+    date: 2025-05-04
+  author: "HashiCorp"
   container-title: "HashiCorp Developer"
-  issued:
-    year: 2022
 
 grafana-vault-integration:
   type: web
   title: "Vault Integration Reference"
-  URL: https://grafana.com/docs/grafana-cloud/monitor-infrastructure/integrations/integration-reference/integration-vault/
-  accessed:
-    year: 2025
-    month: 5
-    day: 4
-  author:
-    - name: "Grafana Labs"
+  url:
+    value: https://grafana.com/docs/grafana-cloud/monitor-infrastructure/integrations/integration-reference/integration-vault/
+    date: 2025-05-04
+  author: "Grafana Labs"
   container-title: "Grafana Documentation"
-  issued:
-    year: 2024
 
 hashicorp-transit:
   type: web
   title: "Encryption as a Service with Vault's Transit Secret Engine"
-  URL: https://www.hashicorp.com/en/resources/encryption-as-a-service-with-vault-s-transit-secret-engine
-  accessed:
-    year: 2025
-    month: 5
-    day: 4
-  author:
-    - name: "HashiCorp"
+  url:
+    value: https://www.hashicorp.com/en/resources/encryption-as-a-service-with-vault-s-transit-secret-engine
+    date: 2025-05-04
+  author: "HashiCorp"
   container-title: "HashiCorp Resources"
-  issued:
-    year: 2023
+
+nginx-load-balancing:
+  type: web
+  title: HTTP Load Balancing
+  url:
+    value: https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/
+    date: 2025-05-04
+  author: "NGINX"

@@ -46,7 +46,7 @@ services/
 
 === Vault auto-unseal - Vault transit engine
 
-For Vault auto-unseal, we use the simplest approach that Vault supports: the Vault Transit Engine. This implementation follows a "transit as a service" pattern, where one dedicated Vault instance (`vault-transit-1`) provides encryption services used to unseal the other Vault instances in the cluster.
+For Vault auto-unseal, we use the simplest approach that Vault supports: the Vault Transit Engine @hashicorp-transit. This implementation follows a "transit as a service" pattern, where one dedicated Vault instance (`vault-transit-1`) provides encryption services used to unseal the other Vault instances in the cluster.
 
 ==== Transit engine architecture
 
@@ -212,7 +212,7 @@ This sequence ensures that dependencies are satisfied before each service attemp
 #include "nginx.typ"
 
 == Prometheus
-Prometheus is deployed as a Docker Swarm service with 3 replicas. It connects to the internal overlay network `vault-network`. Configuration is injected via Docker config (`prometheus-config`). Data is stored using a persistent volume.
+Prometheus is deployed as a Docker Swarm service with 3 replicas @hashicorp-telemetry. It connects to the internal overlay network `vault-network`. Configuration is injected via Docker config (`prometheus-config`). Data is stored using a persistent volume.
 #figure(
   image("../../static/prometheus-architecture.png"),
   caption: [Prometheus and Vault Monitoring Architecture],

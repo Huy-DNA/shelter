@@ -1,5 +1,4 @@
-
-NGINX's configuration in this project is tailored to support the Vault cluster. Here’s how it’s set up:
+NGINX's configuration in this project is tailored to support the Vault cluster @nginx-load-balancing. Here’s how it’s set up:
 
 === Upstream Block
 The `upstream` directive defines the group of backend Vault servers:
