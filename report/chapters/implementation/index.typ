@@ -210,3 +210,53 @@ This sequence ensures that dependencies are satisfied before each service attemp
 == Reverse Proxy / Load Balancer (NGINX)
 
 #include "nginx.typ"
+
+== Prometheus
+Prometheus is deployed as a Docker Swarm service with 3 replicas. It connects to the internal overlay network `vault-network`. Configuration is injected via Docker config (`prometheus-config`). Data is stored using a persistent volume.
+#figure(
+  image("../../static/prometheus-architecture.png"),
+  caption: [Prometheus and Vault Monitoring Architecture],
+)
+=== Metrics Collection Configuration
+Each Vault node exposes metrics via `/v1/sys/metrics?format=prometheus`. Prometheus is configured to scrape them as follows:
+
+```yaml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'vault-1'
+    metrics_path: '/v1/sys/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['vault-1:8200']
+
+  - job_name: 'vault-2'
+    metrics_path: '/v1/sys/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['vault-2:8200']
+
+  - job_name: 'vault-3'
+    metrics_path: '/v1/sys/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['vault-3:8200']
+
+  - job_name: 'vault-transit-1'
+    metrics_path: '/v1/sys/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['vault-transit-1:8200']
+```
+
+=== Grafana Integration
+Grafana is configured to use Prometheus as a data source. Dashboards include:
+- Vault health and leader election.
+- Token usage and secret engine performance.
+- System metrics from `node_exporter`.
