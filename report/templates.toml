@@ -12,10 +12,13 @@ name = "Lê Đình Thuận"
 
 [[students]]
 name = "Trần Nguyễn Phương Thành"
-id = ""
+id = "2110541"
 [[students]]
 name = "Đỗ Nguyễn An Huy"
 id = 2110193
+[[students]]
+name = "Tôn Trọng Tín"
+id = 2033338
 
 [fonts]
 serif = "Times New Roman"

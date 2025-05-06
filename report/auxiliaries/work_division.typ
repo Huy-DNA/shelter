@@ -20,5 +20,11 @@
   [
     - Setup Vault cluster with Docker Swarm.
     - Monitor Vault Node performance with Prometheus and Grafana.
+  ],
+
+  [2033338],
+  [Tôn Trọng Tín],
+  [
+    - Setup Prometheus and Grafana Dashboard.
   ]
 )
