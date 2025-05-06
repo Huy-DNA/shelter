@@ -217,6 +217,7 @@ Prometheus is deployed as a Docker Swarm service with 3 replicas. It connects to
   image("../../static/prometheus-architecture.png"),
   caption: [Prometheus and Vault Monitoring Architecture],
 )
+
 === Metrics Collection Configuration
 Each Vault node exposes metrics via `/v1/sys/metrics?format=prometheus`. Prometheus is configured to scrape them as follows:
 

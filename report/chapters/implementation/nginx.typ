@@ -90,12 +90,3 @@ NGINX integrates seamlessly with the Vault cluster, enhancing its functionality:
 ==== Monitoring
 - The `/health` endpoint allows external tools to verify NGINX’s status.
 - The `/debug` endpoint aids in troubleshooting.
-
-=== What NGINX Can Do in the System
-
-NGINX’s capabilities elevate the Vault cluster:
-- *Scalability*: Easily add more Vault nodes to `vault_backend` as traffic grows.
-- *Performance*: Reduces latency with persistent connections and efficient load distribution.
-- *Resilience*: Ensures uptime with multiple NGINX instances and failover.
-- *Security*: Hides Vault nodes and can be extended with HTTPS (currently missing).
-
