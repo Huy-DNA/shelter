@@ -61,7 +61,7 @@ export VAULT_TOKEN=$TRANSIT_TOKEN
 
 echo "Transit token retrieved successfully"
 echo "Starting vault..."
-vault server -config=/vault/config/vault-config.hcl &
+vault server -config=/vault/config/vault-config.hcl > /dev/null 2>&1 &
 VAULT_PID=$!
 echo "Waiting for Vault to start..."
 for i in $(seq 1 30); do
