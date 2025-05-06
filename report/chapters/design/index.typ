@@ -1,8 +1,10 @@
-= Design <prometheus-design>
+= Design <design>
 
-== Monitoring Objectives
-The goal of the monitoring system is to ensure the high availability and operational health of the Vault deployment. Prometheus collects metrics from all Vault nodes and related services, allowing operators to:
-- Detect unseal or cluster issues
-- Monitor request rates and token creation
-- Track system resource usage (CPU, RAM, Disk)
-- Provide data visualization and alerts
+Our high-level design is shown in @system-design. As mentioned, we use:
+- ZeroTier as a VPN layer for all of the machines providing the service.
+- Vault transit engine as the autounseal mechanism.
+- Prometheus for telemetry collection.
+- Grafana for telemetry visualization.
+- NGINX for load balancer.
+
+#figure(caption: "Design", image("../../static/design.jpg")) <system-design>
