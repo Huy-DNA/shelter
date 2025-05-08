@@ -1,16 +1,13 @@
 #!/bin/sh
 set -e
 
-echo "📦 Creating new Docker config for Prometheus..."
-docker config create prometheus-config ./prometheus/prometheus.yml
-
 echo "🔄 Initializing Docker Swarm (if not active)..."
 if ! docker info --format '{{.Swarm.LocalNodeState}}' | grep -q "active"; then
   docker swarm init || echo "Swarm already initialized"
 fi
 
 echo "🔨 Building Vault service images..."
-for SERVICE in vault-1 vault-2 vault-3 vault-transit-1 load-balancer; do
+for SERVICE in vault-1 vault-2 vault-3 vault-transit-1 load-balancer prometheus; do
   echo "➡️ Building $SERVICE..."
   (cd $SERVICE && docker build -t $SERVICE .)
 done

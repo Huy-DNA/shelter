@@ -26,6 +26,10 @@ cd load-balancer
 docker build -t load-balancer .
 cd -
 
+cd prometheus
+docker build -t prometheus .
+cd -
+
 echo "Starting full Vault stack..."
 sudo docker stack deploy --compose-file=docker-compose.yml vault
 

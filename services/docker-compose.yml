@@ -1,16 +1,15 @@
 services:
   prometheus:
-    image: prom/prometheus:latest
+    image: prometheus
     ports:
       - "9090:9090"
     networks:
       - vault-network
-    configs:
-      - source: prometheus-config
-        target: /etc/prometheus/prometheus.yml
     deploy:
       mode: replicated
       replicas: 3
+    volumes:
+      - prom-data:/prometheus
 
   grafana:
     image: grafana/grafana
@@ -107,6 +106,7 @@ volumes:
   vault-3-data:
   grafana-data:
   nginx-data:
+  prom-data:
 
 configs:
   prometheus-config:

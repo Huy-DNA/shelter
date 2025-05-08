@@ -20,3 +20,12 @@ vault write auth/userpass/users/root \
   policies=admin
 
 vault secrets enable -path=kv kv-v2
+
+vault policy write prometheus-metrics - << EOF
+path "/sys/metrics" {
+  capabilities = ["read"]
+}
+EOF
+
+TOKEN=$(vault token create -field=token -policy prometheus-metrics)
+vault kv put secret/prometheus/vault-metrics token="$TOKEN"
