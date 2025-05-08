@@ -71,15 +71,9 @@ export VAULT_TOKEN=$TRANSIT_TOKEN
 echo "Transit token retrieved successfully"
 echo "Starting vault..."
 
-vault server -config=/vault/config/vault-config.hcl &
+vault server -config=/vault/config/vault-config.hcl > /dev/null 2>&1 &
 VAULT_PID=$!
-echo "Waiting for Vault to start..."
-for i in $(seq 1 30); do
-  if vault status > /dev/null 2>&1; then
-    echo "Vault is up!"
-    break
-  fi
-  sleep 1
-done
+
+vault operator raft join http://vault-1:8200
 
 wait "$VAULT_PID"

@@ -10,7 +10,6 @@ storage "raft" {
   retry_join {
     leader_api_addr = "http://vault-1:8200"
   }
-
 }
 
 listener "tcp" {
