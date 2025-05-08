@@ -57,7 +57,7 @@ nginx:
   image: nginx
   hostname: nginx
   ports:
-    - "80:80"
+    - "8080:8080"
   networks:
     - vault-network
   deploy:
@@ -65,7 +65,7 @@ nginx:
     replicas: 3
 ```
 - *Replicas*: Runs three NGINX instances for redundancy.
-- *Ports*: Maps port 80 on the host to NGINX.
+- *Ports*: Maps port 8080 on the host to NGINX.
 - *Network*: Connects to `vault-network` for Vault communication.
 
 === Role in the System
@@ -73,7 +73,7 @@ nginx:
 NGINX integrates seamlessly with the Vault cluster, enhancing its functionality:
 
 ==== Request Flow
-1. A client sends a request to NGINX (e.g., `http://nginx:80/`).
+1. A client sends a request to NGINX (e.g., `http://nginx:8080/`).
 2. NGINX selects a Vault node from `vault_backend` and forwards the request.
 3. The Vault node processes it and responds to NGINX.
 4. NGINX relays the response to the client.
