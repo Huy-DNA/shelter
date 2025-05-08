@@ -18,3 +18,5 @@ EOL
 vault write auth/userpass/users/root \
   password=$ROOT_PASSWORD \
   policies=admin
+
+vault secrets enable -path=kv kv-v2
