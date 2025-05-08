@@ -59,6 +59,8 @@ Success! Data written to: auth/userpass/users/root
 Success! Enabled the kv-v2 secrets engine at: kv/
     ```
   - Screenshots:
+  #figure(caption: [Vault-1: There's a kv secret named `mysecret` inside this secret engine.], image("/static/vault-1.jpg"))
+    
 - `vault-2`: Accessed on port 8082 of the Docker swarm master.
   - Logs:
 ```sh
@@ -114,6 +116,7 @@ Key       Value
 Joined    true
 ```
   - Screenshots:
+  #figure(caption: [Vault-2: There's a kv secret named `mysecret` inside this secret engine, which is shared in the cluster.], image("/static/vault-2.jpg"))
 - `vault-3`: Accessed on port 8083 of the Docker swarm master.
   - Logs:
 ```sh
@@ -168,3 +171,15 @@ Key       Value
 Joined    true
 ```
   - Screenshots:
+  #figure(caption: [Vault-3: There's a kv secret named `mysecret` inside this secret engine, which is shared in the cluster.], image("/static/vault-3.jpg"))
+
+We try accessing from the load balancer, which is a container running NGINX:
+- Logs:
+```sh
+10.0.0.2 - - [08/May/2025:10:57:12 +0000] "GET /v1/sys/health?standbycode=200&sealedcode=200&uninitcode=200&drsecondarycode=200&performancestandbycode=200 HTTP/1.1" 200 411 "http://localhost:8080/ui/vault/secrets/kv/kv/mysecret" "Mozilla/5.0 (X11; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0" "-"
+10.0.0.2 - - [08/May/2025:10:57:12 +0000] "GET /v1/sys/seal-status HTTP/1.1" 200 347 "http://localhost:8080/ui/vault/secrets/kv/kv/mysecret" "Mozilla/5.0 (X11; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0" "-"
+10.0.0.2 - - [08/May/2025:10:57:23 +0000] "GET /v1/sys/health?standbycode=200&sealedcode=200&uninitcode=200&drsecondarycode=200&performancestandbycode=200 HTTP/1.1" 200 483 "http://localhost:8080/ui/vault/secrets/kv/kv/mysecret" "Mozilla/5.0 (X11; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0" "-"
+10.0.0.2 - - [08/May/2025:10:57:23 +0000] "GET /v1/sys/seal-status HTTP/1.1" 200 347 "http://localhost:8080/ui/vault/secrets/kv/kv/mysecret" "Mozilla/5.0 (X11; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0" "-"
+```
+- Screenshots:
+  #figure(caption: [NGINX: There's a kv secret named `mysecret` inside this secret engine, which is shared in the cluster.], image("/static/load-balancer.jpg"))
