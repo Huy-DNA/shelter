@@ -83,16 +83,18 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-  nginx:
-    image: nginx
+  load-balancer:
+    image: load-balancer
     hostname: nginx
     ports:
       - "8080:8080"
     networks:
       - vault-network
+    volumes:
+      - nginx-data:/etc/nginx
     deploy:
       mode: replicated
-      replicas: 3
+      replicas: 1
 networks:
   vault-network:
     driver: overlay
@@ -104,6 +106,7 @@ volumes:
   vault-2-data:
   vault-3-data:
   grafana-data:
+  nginx-data:
 
 configs:
   prometheus-config:

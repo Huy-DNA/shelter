@@ -22,8 +22,8 @@ cd vault-transit-1
 docker build -t vault-transit-1 .
 cd -
 
-cd nginx
-docker build -t nginx .
+cd load-balancer
+docker build -t load-balancer .
 cd -
 
 echo "Starting full Vault stack..."
