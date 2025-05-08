@@ -10,7 +10,7 @@ if ! docker info --format '{{.Swarm.LocalNodeState}}' | grep -q "active"; then
 fi
 
 echo "🔨 Building Vault service images..."
-for SERVICE in vault-1 vault-2 vault-3 vault-transit-1; do
+for SERVICE in vault-1 vault-2 vault-3 vault-transit-1 nginx; do
   echo "➡️ Building $SERVICE..."
   (cd $SERVICE && docker build -t $SERVICE .)
 done

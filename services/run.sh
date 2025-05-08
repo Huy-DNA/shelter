@@ -22,6 +22,10 @@ cd vault-transit-1
 docker build -t vault-transit-1 .
 cd -
 
+cd nginx
+docker build -t nginx .
+cd -
+
 echo "Starting full Vault stack..."
 sudo docker stack deploy --compose-file=docker-compose.yml vault
 
