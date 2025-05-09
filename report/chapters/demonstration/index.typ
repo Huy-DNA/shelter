@@ -6,61 +6,64 @@ The 3 vaults are auto-unsealed, here are the logs and the screenshots:
 - `vault-1`: Accessed on port 8081 of the Docker swarm master.
   - Logs:
     ```sh
-fetch http://nl.alpinelinux.org/alpine/v3.19/main/x86_64/APKINDEX.tar.gz
-WARNING: updating http://nl.alpinelinux.org/alpine/v3.19/main: temporary error (try again later)
-fetch http://nl.alpinelinux.org/alpine/v3.19/community/x86_64/APKINDEX.tar.gz
-WARNING: updating http://nl.alpinelinux.org/alpine/v3.19/community: temporary error (try again later)
-OK: 14 MiB in 35 packages
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-vault-transit not ready yet, waiting...
-Authenticating to Vault...
-Authentication attempt  failed. Elapsed time: 0s of 300s
-Retrying in 5 seconds...
-Authentication successful!
-Proceeding with Vault token...
-Transit token retrieved successfully
-Starting vault...
-Waiting for Vault to start...
-Initializing vault...
-WARNING! The VAULT_TOKEN environment variable is set! The value of this
-variable will take precedence; if this is unwanted please unset VAULT_TOKEN or
-update its value accordingly.
-Success! You are now authenticated. The token information displayed below
-is already stored in the token helper. You do NOT need to run "vault login"
+    fetch http://nl.alpinelinux.org/alpine/v3.19/main/x86_64/APKINDEX.tar.gz
+    WARNING: updating http://nl.alpinelinux.org/alpine/v3.19/main: temporary error (try again later)
+    fetch http://nl.alpinelinux.org/alpine/v3.19/community/x86_64/APKINDEX.tar.gz
+    WARNING: updating http://nl.alpinelinux.org/alpine/v3.19/community: temporary error (try again later)
+    OK: 14 MiB in 35 packages
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    vault-transit not ready yet, waiting...
+    Authenticating to Vault...
+    Authentication attempt  failed. Elapsed time: 0s of 300s
+    Retrying in 5 seconds...
+    Authentication successful!
+    Proceeding with Vault token...
+    Transit token retrieved successfully
+    Starting vault...
+    Waiting for Vault to start...
+    Initializing vault...
+    WARNING! The VAULT_TOKEN environment variable is set! The value of this
+    variable will take precedence; if this is unwanted please unset VAULT_TOKEN or
+    update its value accordingly.
+    Success! You are now authenticated. The token information displayed below
+    is already stored in the token helper. You do NOT need to run "vault login"
 
-again. Future Vault requests will automatically use this token.
+    again. Future Vault requests will automatically use this token.
 
-Key                  Value
----                  -----
-token                hvs.vK3Q6zA07SL7gsc47GVSECEz
-token_accessor       oVmzlZtwRanZO1VbKq4P7qAs
-token_duration       ∞
-token_renewable      false
-token_policies       ["root"]
-identity_policies    []
-policies             ["root"]
-Success! Enabled userpass auth method at: userpass/
-Success! Uploaded policy: admin
-Success! Data written to: auth/userpass/users/root
-Success! Enabled the kv-v2 secrets engine at: kv/
+    Key                  Value
+    ---                  -----
+    token                hvs.vK3Q6zA07SL7gsc47GVSECEz
+    token_accessor       oVmzlZtwRanZO1VbKq4P7qAs
+    token_duration       ∞
+    token_renewable      false
+    token_policies       ["root"]
+    identity_policies    []
+    policies             ["root"]
+    Success! Enabled userpass auth method at: userpass/
+    Success! Uploaded policy: admin
+    Success! Data written to: auth/userpass/users/root
+    Success! Enabled the kv-v2 secrets engine at: kv/
     ```
   - Screenshots:
-  #figure(caption: [Vault-1: There's a kv secret named `mysecret` inside this secret engine.], image("/static/vault-1.jpg"))
-    
+  #figure(
+    caption: [Vault-1: There's a kv secret named `mysecret` inside this secret engine.],
+    image("/static/vault-1.jpg"),
+  )
+
 - `vault-2`: Accessed on port 8082 of the Docker swarm master.
   - Logs:
 ```sh
@@ -115,8 +118,11 @@ Key       Value
 ---       -----
 Joined    true
 ```
-  - Screenshots:
-  #figure(caption: [Vault-2: There's a kv secret named `mysecret` inside this secret engine, which is shared in the cluster.], image("/static/vault-2.jpg"))
+- Screenshots:
+#figure(
+  caption: [Vault-2: There's a kv secret named `mysecret` inside this secret engine, which is shared in the cluster.],
+  image("/static/vault-2.jpg"),
+)
 - `vault-3`: Accessed on port 8083 of the Docker swarm master.
   - Logs:
 ```sh
@@ -170,8 +176,11 @@ Key       Value
 ---       -----
 Joined    true
 ```
-  - Screenshots:
-  #figure(caption: [Vault-3: There's a kv secret named `mysecret` inside this secret engine, which is shared in the cluster.], image("/static/vault-3.jpg"))
+- Screenshots:
+#figure(
+  caption: [Vault-3: There's a kv secret named `mysecret` inside this secret engine, which is shared in the cluster.],
+  image("/static/vault-3.jpg"),
+)
 
 We try accessing from the load balancer, which is a container running NGINX:
 - Logs:
@@ -182,4 +191,44 @@ We try accessing from the load balancer, which is a container running NGINX:
 10.0.0.2 - - [08/May/2025:10:57:23 +0000] "GET /v1/sys/seal-status HTTP/1.1" 200 347 "http://localhost:8080/ui/vault/secrets/kv/kv/mysecret" "Mozilla/5.0 (X11; Linux x86_64; rv:138.0) Gecko/20100101 Firefox/138.0" "-"
 ```
 - Screenshots:
-  #figure(caption: [NGINX: There's a kv secret named `mysecret` inside this secret engine, which is shared in the cluster.], image("/static/load-balancer.jpg"))
+  #figure(
+    caption: [NGINX: There's a kv secret named `mysecret` inside this secret engine, which is shared in the cluster.],
+    image("/static/load-balancer.jpg"),
+  )
+
+Prometheus:
+- Logs:
+```sh
+Primary vault still sealed, waiting...
+Primary vault still sealed, waiting...
+Primary vault still sealed, waiting...
+Primary vault still sealed, waiting...
+Primary vault still sealed, waiting...
+Primary vault still sealed, waiting...
+Primary vault still sealed, waiting...
+Authenticating to Vault...
+Authentication successful!
+level=info ts=2025-05-09T13:54:47.858564107Z caller=main.go:285 msg="no time or size retention was set so using the default time retention" duration=15d
+level=info ts=2025-05-09T13:54:47.858682433Z caller=main.go:321 msg="Starting Prometheus" version="(version=2.8.1, branch=HEAD, revision=4d60eb36dcbed725fcac5b27018574118f12fffb)"
+level=info ts=2025-05-09T13:54:47.858700788Z caller=main.go:322 build_context="(go=go1.11.6, user=root@bfdd6a22a683, date=20190328-18:04:08)"
+level=info ts=2025-05-09T13:54:47.858714284Z caller=main.go:323 host_details="(Linux 6.12.26 #1-NixOS SMP PREEMPT_DYNAMIC Fri May  2 05:59:33 UTC 2025 x86_64 1e9a550103bb (none))"
+level=info ts=2025-05-09T13:54:47.858725215Z caller=main.go:324 fd_limits="(soft=1024, hard=524288)"
+level=info ts=2025-05-09T13:54:47.858734232Z caller=main.go:325 vm_limits="(soft=unlimited, hard=unlimited)"
+level=info ts=2025-05-09T13:54:47.8592877Z caller=main.go:640 msg="Starting TSDB ..."
+level=info ts=2025-05-09T13:54:47.859337365Z caller=web.go:418 component=web msg="Start listening for connections" address=0.0.0.0:9090
+level=info ts=2025-05-09T13:54:47.863656467Z caller=main.go:655 msg="TSDB started"
+level=info ts=2025-05-09T13:54:47.863688047Z caller=main.go:724 msg="Loading configuration file" filename=/etc/prometheus/prometheus.yml
+level=info ts=2025-05-09T13:54:47.864000134Z caller=main.go:751 msg="Completed loading of configuration file" filename=/etc/prometheus/prometheus.yml
+level=info ts=2025-05-09T13:54:47.864030462Z caller=main.go:609 msg="Server is ready to receive web requests."
+```
+- Screenshots:
+  #figure(
+    caption: [Prometheus: 3 vaults are up.],
+    image("/static/prometheus-screenshot.jpg"),
+  )
+
+Grafana:
+  #figure(
+    caption: [Grafana: 3 vaults are up.],
+    image("/static/grafana-screenshot.jpg"),
+  )

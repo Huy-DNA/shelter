@@ -3,6 +3,7 @@ services:
     image: prometheus
     ports:
       - "9090:9090"
+    hostname: prometheus
     networks:
       - vault-network
     deploy:
