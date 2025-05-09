@@ -14,18 +14,23 @@ path "*" {
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
 }
 EOL
-
-vault write auth/userpass/users/root \
-  password=$ROOT_PASSWORD \
-  policies=admin
-
-vault secrets enable -path=kv kv-v2
-
-vault policy write prometheus-metrics - << EOF
+vault policy write metrics - << EOF
 path "/sys/metrics" {
+  capabilities = ["read"]
+}
+path "kv/prometheus/vault-metrics" {
   capabilities = ["read"]
 }
 EOF
 
-TOKEN=$(vault token create -field=token -policy prometheus-metrics)
-vault kv put secret/prometheus/vault-metrics token="$TOKEN"
+vault write auth/userpass/users/root \
+  password=$ROOT_PASSWORD \
+  policies=admin
+vault write auth/userpass/users/metrics \
+  password=$METRICS_PASSWORD \
+  policies=metrics
+
+vault secrets enable -path=kv kv-v2
+
+TOKEN=$(vault token create -field=token -policy metrics)
+vault kv put kv/prometheus/vault-metrics token="$TOKEN"
