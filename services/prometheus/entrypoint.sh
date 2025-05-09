@@ -45,12 +45,9 @@ while true; do
   sleep $RETRY_DELAY
 done
 
-echo "Proceeding with Vault token..."
-
-METRICS_TOKEN=$(curl -s \
+export METRICS_TOKEN=$(curl -s \
     --header "X-Vault-Token: $VAULT_TOKEN" \
-    http://vault-1:8200/kv/prometheus/vault-metrics | jq -r '.data.token')
-echo $METRICS_TOKEN
+       http://vault-1:8200/v1/kv/data/prometheus/vault-metrics | jq -r '.data.data.token')
 
-
+envsubst < /etc/prometheus/prometheus.yml.template > /etc/prometheus/prometheus.yml
 prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus

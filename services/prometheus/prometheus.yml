@@ -9,6 +9,7 @@ scrape_configs:
       format: ['prometheus']
     static_configs:
       - targets: ['vault-1:8200']
+    bearer_token: ${METRICS_TOKEN}
 
   - job_name: 'vault-2'
     metrics_path: '/v1/sys/metrics'
@@ -16,6 +17,7 @@ scrape_configs:
       format: ['prometheus']
     static_configs:
       - targets: ['vault-2:8200']
+    bearer_token: ${METRICS_TOKEN}
 
   - job_name: 'vault-3'
     metrics_path: '/v1/sys/metrics'
@@ -23,10 +25,4 @@ scrape_configs:
       format: ['prometheus']
     static_configs:
       - targets: ['vault-3:8200']
-
-  - job_name: 'vault-transit-1'
-    metrics_path: '/v1/sys/metrics'
-    params:
-      format: ['prometheus']
-    static_configs:
-      - targets: ['vault-transit-1:8200']
+    bearer_token: ${METRICS_TOKEN}

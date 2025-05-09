@@ -18,7 +18,7 @@ vault policy write metrics - << EOF
 path "/sys/metrics" {
   capabilities = ["read"]
 }
-path "kv/prometheus/vault-metrics" {
+path "kv/data/prometheus/*" {
   capabilities = ["read"]
 }
 EOF
