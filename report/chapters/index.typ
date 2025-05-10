@@ -15,3 +15,6 @@
 
 #{ include "./demonstration/index.typ" }
 #pagebreak()
+
+#{ include "./testing/index.typ" }
+#pagebreak()
