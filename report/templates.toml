@@ -17,8 +17,17 @@ id = "2110541"
 name = "Đỗ Nguyễn An Huy"
 id = 2110193
 [[students]]
-name = "Tôn Trọng Tín"
-id = 2033338
+name = "Nguyễn Sỹ Công"
+id = 2210409
+[[students]]
+name = "Trần Quốc Toàn"
+id = 2213540
+[[students]]
+name = "Huỳnh Tấn Sỹ"
+id = 2112205
+[[students]]
+name = "Võ Nguyễn Gia Huy"
+id = 2252270
 
 [fonts]
 serif = "Times New Roman"
