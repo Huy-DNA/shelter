@@ -26,5 +26,18 @@
   [Tôn Trọng Tín],
   [
     - Setup Prometheus and Grafana Dashboard.
-  ]
+  ],
+
+  [2210409], [Nguyễn Sỹ Công], [
+    - Write report
+  ],
+  [2213540], [Trần Quốc Toàn], [
+    - Setup VPN ZeroTier
+  ],
+  [2112205], [Huỳnh Tấn Sỹ], [
+    - Setup Docker swarm.
+  ],
+  [2252270], [Võ Nguyễn Gia Huy], [
+    - Setup NGINX load balancer.
+  ],
 )
